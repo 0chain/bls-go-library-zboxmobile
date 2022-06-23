@@ -97,11 +97,11 @@ IOS_CFLAGS+=-I $(MCL_DIR)/include -I $(BLS_DIR)/include
 IOS_LDFLAGS=-dynamiclib -Wl,-flat_namespace -Wl,-undefined -Wl,suppress
 CURVE_BIT?=384_256
 IOS_LIB=libbls$(CURVE_BIT).a
-IOS_LIBS=ios/armv7/$(IOS_LIB) ios/arm64/$(IOS_LIB)
+IOS_LIBS=ios/armv7/$(IOS_LIB) ios/arm64/$(IOS_LIB) iossimulator/x86_64/$(IOS_LIB) iossimulator/i386/$(IOS_LIB)
 SIMULATOR_LIBS= iossimulator/arm64/$(IOS_LIB) iossimulator/x86_64/$(IOS_LIB) iossimulator/i386/$(IOS_LIB)
 
 
-ios:
+ios: ios_simulator
 	$(MAKE) each_ios OUTDIR="ios" MINVERSION="-mios-version-min" PLATFORM="iPhoneOS" ARCH=armv7 BIT=32 UNIT=4
 	$(MAKE) each_ios OUTDIR="ios" MINVERSION="-mios-version-min" PLATFORM="iPhoneOS" ARCH=arm64 BIT=64 UNIT=8
 	@echo $(IOS_LIBS)
